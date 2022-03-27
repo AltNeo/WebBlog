@@ -9,16 +9,16 @@ Everything was great until I realised that the epub was only upto 1800 something
 
 In a thirst of completion, i scoured the internet, and found a website that machine translated the entire light novel. I should be happy right?
 
-Problem was that i didn't to  read the light novel, i wanted to listen to it so i could do other things simultaneously. 
+Problem was that i didn't to  read the light novel, i wanted to listen to it so i could do other things simultaneously.
 
-1800 webpages, i ccould go the brute force method and individually copy every page to a doc file and turn it into epub, but that could take months. 
+1800 webpages, i ccould go the brute force method and individually copy every page to a doc file and turn it into epub, but that could take months.
 
 Then one day while in a lecture at my college, my data structure and algorithm's teacher Rouff Khan sir said something - "Computers are so important because there is one thing that they are very good at. Recursion, and accurate recursion." Obvious but it gave me an idea, so i set out with only language i knew how to code in - Python and scoured the internet for about 2 hrs.
 
-My findings: 
+My findings:
 A library called beautifulsoup which i did not end up needing but is really cool if you want to check it out.
 A method for python to interpret the webpages it grabbed- lxml
-And a module to create and edit a docx file from python itself. 
+And a module to create and edit a docx file from python itself.
 
 The idea was simple, the program would take a url, copy the chapter, add it to the docx with the first sentence as the title (to improve ease of navigation) and move on to the next url
 Some trivial things i realised while making the program
@@ -28,8 +28,12 @@ Some trivial things i realised while making the program
 
 The code is pretty self explanatory, but unfortunatly i do not have all the sites that i had open at the time. So you might have to look around if you want to modify the files.
 
-Here is the code in its entirety:
-<code>
+Here is the code in its entirety-
+
+[Code](https://github.com/AltNeo/webpage-to-docx/blob/main/Ebook%20Builder%20102.py)
+(Code Blocks gave me compilation error but i seemed to have figured it out)
+
+```
 from lxml import html
 import requests, docx
 i=1872
@@ -52,7 +56,7 @@ while i<2300:
 
     i=i+1
 mydoc.save("Epub.docx")
-</code>
+```
 
 You might need to pip install the libraries.
 Print statements are not necessary, i just wanted to see how fast my program was going.
