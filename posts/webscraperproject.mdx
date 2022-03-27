@@ -1,0 +1,58 @@
+---
+title: Webpage to Epub Project (Python)
+description: "A web scraper project (python) because I want TextToSpeech for AI translated light novels."
+date : March 27 2022
+---
+Versatile Mage, a light novel, adapted into manga and anime of same name, was on my read list for a while. When i  found out that it was available in epub form, precompiled and translated, i was on the ninth cloud. I immediatly downloaded it and with the help of my trusty app, Moon+ Reader, divulged into the magical world using tts.
+
+Everything was great until I realised that the epub was only upto 1800 something chapters. (complete is in the range of 3200 chapters). I tried searching for the second part of the epub, with the rest of the chapters and found out that they weren't translated yet.
+
+In a thirst of completion, i scoured the internet, and found a website that machine translated the entire light novel. I should be happy right?
+
+Problem was that i didn't to  read the light novel, i wanted to listen to it so i could do other things simultaneously. 
+
+1800 webpages, i ccould go the brute force method and individually copy every page to a doc file and turn it into epub, but that could take months. 
+
+Then one day while in a lecture at my college, my data structure and algorithm's teacher Rouff Khan sir said something - "Computers are so important because there is one thing that they are very good at. Recursion, and accurate recursion." Obvious but it gave me an idea, so i set out with only language i knew how to code in - Python and scoured the internet for about 2 hrs.
+
+My findings: 
+A library called beautifulsoup which i did not end up needing but is really cool if you want to check it out.
+A method for python to interpret the webpages it grabbed- lxml
+And a module to create and edit a docx file from python itself. 
+
+The idea was simple, the program would take a url, copy the chapter, add it to the docx with the first sentence as the title (to improve ease of navigation) and move on to the next url
+Some trivial things i realised while making the program
+1. The paragraphs that were scraped from the page were stored in form of list. This made setting the first sentence as title really easy.
+2. I had to view the source code of the website to identify which elements had the text i needed.
+3. Coding is easy if your google game is strong. You just need to know what you are looking for.
+
+The code is pretty self explanatory, but unfortunatly i do not have all the sites that i had open at the time. So you might have to look around if you want to modify the files.
+
+Here is the code in its entirety:
+<code>
+from lxml import html
+import requests, docx
+i=1872
+mydoc=docx.Document()
+while i<2300:
+    page= requests.get("https://goblinsguide.com/versatile-mage/versatile-mage-chapter-"+str(i))
+    tree= html.fromstring(page.content)
+    '''print(tree)'''
+    texta=tree.xpath('//p/text()')
+    print(texta)
+
+    
+    head=texta[0]
+    print(head)
+    mydoc.add_heading(head,level=1)
+    mydoc.add_paragraph(texta)
+    mydoc.add_paragraph("            ")
+    mydoc.add_paragraph("            ")
+
+
+    i=i+1
+mydoc.save("Epub.docx")
+</code>
+
+you might need to pip install the libraries.
+print statements are not necessary, i just wanted to see how fast my program was going.
